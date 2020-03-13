@@ -8,7 +8,7 @@ if [ "$TRAVIS_PULL_REQUEST" = "true" ] || [ "$TRAVIS_BRANCH" != "master" ]; then
     exit $?
 fi
 
-echo $DOCKER_PASSWORD | docker login -u qmcgaw --password-stdin &> /dev/null
+echo $DOCKER_PASSWORD | docker login -u $DOCKER_USER --password-stdin &> /dev/null
 TAG="${TRAVIS_TAG:-latest}"
 
 docker buildx build \

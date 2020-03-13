@@ -3,19 +3,20 @@ dist: xenial
 sudo: required
 env:
   global:
-    - DOCKER_REPO=<DOCKER_USER/DOCKER_IMAGE>
+  - DOCKER_REPO=<DOCKER_USER/DOCKER_IMAGE>
+  - secure: BB66+ZCKRelrii3dxWw50TvPUfaqIiY0FsY6q2MCXeQd7+vOYGnbfYBHnaZMahOgQIm+ytItEfw+MGBNDBlLhpH92Dqj+9icFQiDDa9uAqnbTh6HZEWTXkzu1ZJ+1pszSX79OBE/2HyCMZSuoweemDxNHeV3fYhc3LKGXEJshbpbWk7N2d+iXf/eINaCPf5kUz7tYumwjgXHUEvOsj8MIIo/n9WSM7LLju9bF5t3b+E7GqO6EBZCx8jKoP5MEqEJ+1WfZbE/+tzaTPdxCzhSYUlAUzJ2WMvEBjLXKm88glEwqoFKP2RVnPDxc081HOLkmMitBy9OlRzDrof45nQzF2+sbd2EAGqi9WM6UhnTwLfxhOwT1OmD+EfJitqopiy7aJYCepnfZmbgCbn6JF1IdFNOkcv+xKytVthTBy+1jWdtvK7Le/mB5XL5ag+6uuxUuSFUEpATtm0tBt+KmCOZG6eWIUNQDMG7Zsb0IkEzyAfsi3i5BasDXcFzIEcs8X9WDVLoUR6h/QEa90jIHpRKKIhyJNAMItuAucW/vR4SKevvCAcUfLwraPe4ntOt3GRuXFsfnD63y0/vYrnaTSrWuCOG8c77eeV0MWTRWqOKAcPHMIp44w67Ec574IDO2c3jTopoob9qQzEOgZE/0OCmTVs9kJmJ3hmFiIoMpM21yQI=
 install:
-  - npm i
+- npm i
 script:
-  - npm run test
+- npm run test
 before_deploy:
-  - curl -fsSL https://get.docker.com | sh
-  - echo '{"experimental":"enabled"}' | sudo tee /etc/docker/daemon.json
-  - mkdir -p $HOME/.docker
-  - echo '{"experimental":"enabled"}' | sudo tee $HOME/.docker/config.json
-  - sudo service docker start
-  - docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-  - docker buildx create --name xbuilder --use
+- curl -fsSL https://get.docker.com | sh
+- echo '{"experimental":"enabled"}' | sudo tee /etc/docker/daemon.json
+- mkdir -p $HOME/.docker
+- echo '{"experimental":"enabled"}' | sudo tee $HOME/.docker/config.json
+- sudo service docker start
+- docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+- docker buildx create --name xbuilder --use
 deploy:
   provider: script
   script: bash scripts/deploy.sh
