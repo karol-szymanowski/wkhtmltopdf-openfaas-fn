@@ -5,9 +5,12 @@ FROM openfaas/classic-watchdog:0.18.1 as watchdog
 FROM node:12.13.0-alpine as ship
 
 RUN apk update freetype freetype-dev ttf-freefont
+RUN apk add --update --no-cache \
+    libgcc libstdc++ libx11 glib libxrender libxext libintl \
+    ttf-dejavu ttf-droid ttf-freefont ttf-liberation ttf-ubuntu-font-family
 
-COPY --from=wkhtmltopdf_image /bin/wkhtmltopdf /usr/bin/
-RUN chmod +x /usr/bin/wkhtmltopdf
+COPY --from=wkhtmltopdf_image /bin/wkhtmltopdf /bin/wkhtmltopdf
+RUN chmod +x /bin/wkhtmltopdf
 
 COPY --from=watchdog /fwatchdog /usr/bin/fwatchdog
 RUN chmod +x /usr/bin/fwatchdog
