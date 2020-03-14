@@ -4,7 +4,7 @@ const wkhtmltopdf = require('wkhtmltopdf');
 const MemoryStream = require('memorystream');
 
 module.exports = async (event, callback) => {
-    callback(null, { event, context });
+    callback(null, { event });
     // const memStream = new MemoryStream();
     // const html_utf8 = new Buffer(event.body.html_base64, 'base64').toString('utf8');
     // wkhtmltopdf(html_utf8, event.body.options, (code, signal) => {
