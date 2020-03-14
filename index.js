@@ -1,7 +1,7 @@
 // Copyright (c) Alex Ellis 2017. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-"use strict"
+"use strict";
 
 const getStdin = require('get-stdin');
 
@@ -20,7 +20,7 @@ getStdin().then(val => {
         } else {
             process.stdout.write(res);
         }
-    } // cb ...
+    }; // cb ...
 
     const result = handler(val, cb);
     if (result instanceof Promise) {

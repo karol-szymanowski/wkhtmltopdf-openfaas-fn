@@ -12,6 +12,6 @@ module.exports = async (event, callback) => {
             callback(null, { pdf_base64: memStream.read().toString('base64') });
         }).pipe(memStream);
     } catch (e) {
-        callback({ error: e, path: process.env['PATH'] })
+        callback(e);
     }
-}
+};
