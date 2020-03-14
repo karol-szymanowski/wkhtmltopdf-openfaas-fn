@@ -1,6 +1,11 @@
+FROM madnight/docker-alpine-wkhtmltopdf as wkhtmltopdf_image
+
 FROM openfaas/classic-watchdog:0.18.1 as watchdog
 
 FROM node:12.13.0-alpine as ship
+
+COPY --from=wkhtmltopdf_image /bin/wkhtmltopdf /usr/bin/wkhtmltopdf
+RUN chmod +x /usr/bin/wkhtmltopdf
 
 COPY --from=watchdog /fwatchdog /usr/bin/fwatchdog
 RUN chmod +x /usr/bin/fwatchdog

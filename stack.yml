@@ -5,7 +5,9 @@ provider:
 functions:
   wkhtmltopdf:
     lang: node-armhf
-    handler: ./wkhtmltopdf
+    handler: ./function/handler.js
     image: tetrash/wkhtmltopdf-node-fn:latest
     environment:
-      MAX_JSON_SIZE: '5mb'
+      write_timeout: 1m
+      read_timeout: 1m
+      exec_timeout: 1m
