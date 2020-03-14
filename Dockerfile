@@ -4,7 +4,9 @@ FROM openfaas/classic-watchdog:0.18.1 as watchdog
 
 FROM node:12.13.0-alpine as ship
 
-COPY --from=wkhtmltopdf_image /bin/wkhtmltopdf /usr/bin/wkhtmltopdf
+RUN apk update freetype freetype-dev ttf-freefont
+
+COPY --from=wkhtmltopdf_image /bin/wkhtmltopdf /usr/bin/
 RUN chmod +x /usr/bin/wkhtmltopdf
 
 COPY --from=watchdog /fwatchdog /usr/bin/fwatchdog
