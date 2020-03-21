@@ -1,12 +1,12 @@
 version: 1.0
 provider:
   name: openfaas
-  gateway: http://127.0.0.1:8080
+  gateway: https://gateway.kube-rpi.pl/
 functions:
   wkhtmltopdf:
     lang: node-armhf
     handler: ./function/handler.js
-    image: tetrash/wkhtmltopdf-node-fn:latest
+    image: tetrash/wkhtmltopdf-node-fn:0.1.0
     environment:
       write_timeout: 1m
       read_timeout: 1m
